@@ -1,4 +1,7 @@
 {
   "name": "micro-auth",
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "dependencies": {
+    "mongoose": "^4.9.6"
+  }
 }
