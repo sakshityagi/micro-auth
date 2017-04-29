@@ -1,11 +1,11 @@
 'use strict';
 
 
-var express = require('express');
-var controller = require('./user.controller');
+const express = require('express');
+const controller = require('./user.controller');
 //var auth = require('../auth/auth.service');
 
-var router = express.Router();
+const router = express.Router();
 
 //router.get('/me', auth.isAuthenticated(), controller.me);
 //router.put('/:id', auth.isAuthenticated(), controller.updateUser);

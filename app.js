@@ -1,8 +1,8 @@
-var express = require('express');
-var mongoose = require('mongoose');
-var open = require('open');
-var bodyParser = require('body-parser')
-var user = require('./user');
+const express = require('express');
+const mongoose = require('mongoose');
+const open = require('open');
+const bodyParser = require('body-parser')
+const user = require('./user');
 
 const port = 3000;
 const app = express();
