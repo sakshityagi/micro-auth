@@ -26,7 +26,7 @@ exports.create = function (req, res) {
     bcrypt.hash(args.password, null, null, function(err, hash) {
         // Store hash in your password DB.
         if(err || !hash){
-            return res.sendStatus(400);
+            return res.status(400).send("Unable to create hashed password.");
         }
         args.password = hash;
         const newUser = new User(args);
@@ -35,7 +35,7 @@ exports.create = function (req, res) {
                 var token = jwt.sign({ _id: user._id }, "micro-auth", {
                     expiresIn: 60 * 60 * 5
                 });
-                return res.json({ token });
+                return res.status(200).send({ token });
             })
             .catch(validationError(res));
     });
@@ -56,17 +56,21 @@ exports.me = function(req, res, next) {};
  */
 exports.login = function (req, res) {
     let args = req.body;
-    User.findOne({'username':args.username}).then(function(user) {
+    User.findOne({
+        'username':args.username
+    }).then(function(user) {
         if(!user){
-            return res.sendStatus(401);
-        } else {
-            bcrypt.compare(args.password, user.password, function(err, result) {
-                if(result){
-                    return res.sendStatus(200);
-                } else {
-                    return res.sendStatus(401);
-                }
-            });
+            return res.status(401).send("Couldn't find user.");
         }
+        bcrypt.compare(args.password, user.password, function(err, result) {
+            if(result){
+                var token = jwt.sign({ _id: user._id }, "micro-auth", {
+                    expiresIn: 60 * 60 * 5
+                });
+                return res.status(200).send({ token });
+            } else {
+                return res.status(401).send("Invalid username or password");
+            }
+        });
     });
 };
