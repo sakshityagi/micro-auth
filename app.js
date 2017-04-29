@@ -4,7 +4,7 @@ const open = require('open');
 const bodyParser = require('body-parser')
 const user = require('./user');
 
-const port = 3000;
+const port = process.env.PORT | 3000;
 const app = express();
 const config = {
     mongo: {
@@ -29,6 +29,5 @@ app.listen(port, function (err) {
     console.log(err);
   } else {
     console.log("App is working ...");
-    open(`http://localhost:${port}`);
   }
 });
