@@ -11,8 +11,8 @@ const userSchema = new Schema({
         latitude: Number,
         longitude: Number
     },
-    created_at: Date,
-    updated_at: Date
+    created_at: { "type": Number, "default": Date.now },
+    updated_at: { "type": Number, "default": Date.now }
 });
 
 const User = mongoose.model('User', userSchema);

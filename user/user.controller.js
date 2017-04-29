@@ -1,6 +1,8 @@
 'use strict';
 
-var User = require('./user.model');
+const User = require('./user.model');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt-nodejs');
 
 const validationError = (res, statusCode) => {
     statusCode = statusCode || 422;
@@ -19,7 +21,25 @@ const handleError = (res, statusCode) => {
 /**
  * Creates a new user
  */
-exports.create = function (req, res) {};
+exports.create = function (req, res) {
+    let args = req.body;
+    bcrypt.hash(args.password, null, null, function(err, hash) {
+        // Store hash in your password DB.
+        if(err || !hash){
+            return res.sendStatus(400);
+        }
+        args.password = hash;
+        const newUser = new User(args);
+        newUser.save()
+            .then(function(user) {
+                var token = jwt.sign({ _id: user._id }, "micro-auth", {
+                    expiresIn: 60 * 60 * 5
+                });
+                return res.json({ token });
+            })
+            .catch(validationError(res));
+    });
+};
 
 /**
  * Update user info
