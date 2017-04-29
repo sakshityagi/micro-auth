@@ -51,8 +51,22 @@ exports.updateUser = function (req, res) {};
  */
 exports.me = function(req, res, next) {};
 
-exports.findByToken = (token, cb) => {
-    process.nextTick(() => {
-
+/**
+ * Login a user with valid credentials
+ */
+exports.login = function (req, res) {
+    let args = req.body;
+    User.findOne({'username':args.username}).then(function(user) {
+        if(!user){
+            return res.sendStatus(401);
+        } else {
+            bcrypt.compare(args.password, user.password, function(err, result) {
+                if(result){
+                    return res.sendStatus(200);
+                } else {
+                    return res.sendStatus(401);
+                }
+            });
+        }
     });
 };
