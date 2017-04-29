@@ -19,7 +19,9 @@ const handleError = (res, statusCode) => {
 /**
  * Creates a new user
  */
-export const create = (req, res) => {};
+export const create = (req, res) => {
+    
+};
 
 /**
  * Update user info
@@ -30,3 +32,9 @@ export const updateUser = (req, res) => {};
  * Get my info
  */
 export function me(req, res, next) {}
+
+export const findByToken = (token, cb) => {
+    process.nextTick(() => {
+
+    });
+};

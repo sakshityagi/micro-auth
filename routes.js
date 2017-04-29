@@ -4,8 +4,14 @@
 
 'use strict';
 import path from 'path';
+import passport from 'passport';
 
 export default app =>  {
+    app.get('/',
+        passport.authenticate('bearer', { session: false }),
+        function(req, res) {
+            res.json({ username: req.user.username, email: req.user.emails[0].value });
+        });
     app.use('/user', require('./user'));
     app.use('/auth', require('./auth').default);
 
