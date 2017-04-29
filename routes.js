@@ -3,9 +3,9 @@
  */
 
 'use strict';
-import path from 'path';
+var path = require('path');
 
-export default app =>  {
+module.exports = app =>  {
     app.use('/user', require('./user'));
     app.use('/auth', require('./auth').default);
 

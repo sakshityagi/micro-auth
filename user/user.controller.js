@@ -1,6 +1,6 @@
 'use strict';
 
-import User from './user.model';
+var User = require('./user.model');
 
 const validationError = (res, statusCode) => {
     statusCode = statusCode || 422;
@@ -19,14 +19,14 @@ const handleError = (res, statusCode) => {
 /**
  * Creates a new user
  */
-export const create = (req, res) => {};
+exports.me = function (req, res) {};
 
 /**
  * Update user info
  */
-export const updateUser = (req, res) => {};
+exports.updateUser = function (req, res) {};
 
 /**
  * Get my info
  */
-export function me(req, res, next) {}
+exports.me = function(req, res, next) {};

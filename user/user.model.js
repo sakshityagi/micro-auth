@@ -1,5 +1,6 @@
 'use strict';
-import mongoose, { Schema } from 'mongoose';
+var mongoose =  require('mongoose');
+var Schema = mongoose.Schema;
 
 const userSchema = new Schema({
     name: String,
@@ -15,4 +16,4 @@ const userSchema = new Schema({
 });
 
 const User = mongoose.model('User', userSchema);
-export default User;
+module.exports =  User;
