@@ -3,10 +3,10 @@
  */
 
 'use strict';
-import path from 'path';
-import passport from 'passport';
+var path = require('path');
+var passport = require('passport');
 
-export default app =>  {
+module.exports = app =>  {
     app.get('/',
         passport.authenticate('bearer', { session: false }),
         function(req, res) {

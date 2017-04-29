@@ -2,8 +2,11 @@
   "name": "micro-auth",
   "version": "0.0.1",
   "dependencies": {
+    "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "mongoose": "^4.9.6",
+    "open": "0.0.5",
+    "passport": "^0.3.2",
     "passport-http-bearer": "^1.0.1"
   }
 }
